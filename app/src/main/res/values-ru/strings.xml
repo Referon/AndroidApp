@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">НМедиа</string>
-    <string name="text">НМедиа!</string>
+    <string name="hello">Привет Мир!</string>
+    <string name="avatars">Аватар</string>
+    <string name="icon_views">Иконка просмотров</string>
+    <string name="icon_share">Иконка поделиться</string>
+    <string name="icon_like">Иконка лайков</string>
+    <string name="options">Опции</string>
 </resources>
