@@ -67,14 +67,6 @@
         app:layout_constraintTop_toBottomOf="@id/header_barrier"
         tools:text="@sample/posts.json/data/message"/>
 
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/under_barrier"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:barrierMargin="@dimen/common_spacing"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="message" />
-
     <ImageButton
         android:id="@+id/ic_views"
         android:layout_width="wrap_content"
@@ -82,9 +74,9 @@
         android:src="@drawable/ic_eye_24"
         android:background="@android:color/transparent"
         android:layout_marginTop="@dimen/common_spacing"
-        android:layout_marginEnd="10dp"
+        android:layout_marginEnd="12dp"
         app:layout_constraintEnd_toStartOf="@id/views"
-        app:layout_constraintTop_toBottomOf="@id/under_barrier"
+        app:layout_constraintTop_toBottomOf="@id/message"
         android:contentDescription="@string/icon_views" />
 
     <TextView
@@ -92,7 +84,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
-        app:layout_constraintTop_toBottomOf="@id/under_barrier"
+        app:layout_constraintTop_toBottomOf="@id/message"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="@sample/posts.json/data/views"/>
     <ImageButton
@@ -105,7 +97,7 @@
         android:background="@android:color/transparent"
         android:contentDescription="@string/icon_share"
         app:layout_constraintStart_toEndOf="@id/ic_like"
-        app:layout_constraintTop_toBottomOf="@id/under_barrier" />
+        app:layout_constraintTop_toBottomOf="@id/message" />
 
     <ImageButton
         android:id="@+id/ic_like"
@@ -115,7 +107,7 @@
         android:layout_marginTop="@dimen/common_spacing"
         android:src="@drawable/ic_like_24"
         android:contentDescription="@string/icon_like"
-        app:layout_constraintTop_toBottomOf="@id/under_barrier"
+        app:layout_constraintTop_toBottomOf="@id/message"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
@@ -123,8 +115,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
-        android:layout_marginStart="10dp"
-        app:layout_constraintTop_toBottomOf="@id/under_barrier"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@id/message"
         app:layout_constraintStart_toEndOf="@id/ic_like"
         tools:text="@sample/posts.json/data/like"/>
 
@@ -133,8 +125,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/common_spacing"
-        android:layout_marginStart="10dp"
-        app:layout_constraintTop_toBottomOf="@id/under_barrier"
+        android:layout_marginStart="12dp"
+        app:layout_constraintTop_toBottomOf="@id/message"
         app:layout_constraintStart_toEndOf="@id/ic_share"
         tools:text="@sample/posts.json/data/share"/>
 
