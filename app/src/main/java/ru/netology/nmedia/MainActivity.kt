@@ -18,8 +18,8 @@ class MainActivity : AppCompatActivity() {
             "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетинку. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растем сами и помогаем расти студентам: от новичков до уверенных профессионалов. Но самое важное остается с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть большее, целиться выше, бежать бысрее. Наша миссия - помочь встать на путь роста и начать цепочку перемен -> http://netolo.gy/fyb",
             "21 мая в 18:36",
             false,
-            0f,
-            999f
+            0,
+            999
         )
 
         with(binding) {
@@ -38,11 +38,11 @@ class MainActivity : AppCompatActivity() {
                 )
                 if (post.likedByMe) {
 
-                    post.likes += 1f
+                    post.likes += 1
 
                 } else {
 
-                    post.likes -= 1f
+                    post.likes -= 1
 
                 }
                 like.text = CounterService.counterWithRemains(post.likes)
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
             icShare.setOnClickListener {
 
-                post.shares += 1f
+                post.shares += 1
                 share.text = CounterService.counterWithRemains(post.shares)
             }
         }

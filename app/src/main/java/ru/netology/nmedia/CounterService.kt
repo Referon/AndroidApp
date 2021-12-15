@@ -5,49 +5,48 @@ import java.text.DecimalFormat
 
 object CounterService {
 
-    private fun counterIntegers(value: Float): String {
-      val result =  when(value) {
-          in 0f..999f -> value
-          in 1000f..9999f -> value/1000
-          in 10000f..99999f -> value/1000
-          in 100000f..999999f -> value/1000
-          in 1000000f..9999999f -> value/1000000
+    private fun counterIntegers(value: Int): String {
+        val result = when (value) {
+            in 0..999 -> value
+            in 1000..9999 -> value / 1000
+            in 10000..99999 -> value / 1000
+            in 100000..999999 -> value / 1000
+            in 1000000..9999999 -> value / 1000000
 
-          else -> 0f
+            else -> 0
         }
-        return result.toLong().toString()
+        return result.toString()
 
     }
 
-    fun counterWithRemains(value: Float): String {
-        val result =  if (value in 1000f..9999f && value%1000 != 0f) {
+    fun counterWithRemains(value: Int): String {
+        val valueToFloat = value.toFloat()
+        val re = if (valueToFloat in 1000f..9999f && valueToFloat % 1000 != 0f) {
 
-            value/1000
-            thousandsAndMillions(value/1000)
+            value / 1000
+            thousandsAndMillions(valueToFloat / 1000)
 
-        }
-        else if (value in 10_000f..99_999f && value%1000 != 0f) {
+        } else if (valueToFloat in 10_000f..99_999f && valueToFloat % 1000 != 0f) {
 
-            value/1000
-            tensThousands(value/1000)
+            value / 1000
+            tensThousands(valueToFloat / 1000)
 
-        }else if (value in 100_000f..999_999f && value%1000 != 0f) {
+        } else if (valueToFloat in 100_000f..999_999f && valueToFloat % 1000 != 0f) {
 
-            value/1000
-            tensThousands(value/1000)
+            value / 1000
+            tensThousands(valueToFloat / 1000)
 
-        }else if (value > 999_999 ) {
+        } else if (value > 999_999) {
 
-            value/1_000_000
-            thousandsAndMillions(value/1_000_000)
+            value / 1_000_000
+            thousandsAndMillions(valueToFloat / 1_000_000)
 
-        }
-        else counterIntegers(value)
+        } else counterIntegers(value)
 
-        return result + letterTheEnd(value)
+        return re.toString() + letterTheEnd(value)
     }
 
-    private fun thousandsAndMillions (value:Float): String {
+    private fun thousandsAndMillions(value: Float): String {
 
         val tenths = DecimalFormat("#.#")
         tenths.roundingMode = RoundingMode.DOWN
@@ -55,7 +54,7 @@ object CounterService {
         return tenths.format(value)
     }
 
-    private fun tensThousands (value:Float): String {
+    private fun tensThousands(value: Float): String {
 
         val integer = DecimalFormat("#")
         integer.roundingMode = RoundingMode.DOWN
@@ -64,13 +63,13 @@ object CounterService {
     }
 
 
-    private fun letterTheEnd (value: Float): String {
+    private fun letterTheEnd(value: Int): String {
 
-        val result = if (value in 1000f..999_999f) {
+        val result = if (value in 1000..999_999) {
             "K"
-        }else if (value > 999_999f) {
+        } else if (value > 999_999) {
             "M"
-        }else ""
+        } else ""
 
         return result
     }
