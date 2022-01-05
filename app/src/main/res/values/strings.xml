@@ -6,4 +6,8 @@
     <string name="icon_share">icon share</string>
     <string name="icon_like">icon like</string>
     <string name="options">optionts</string>
+    <string name="remove">Remove</string>
+    <string name="save">Save</string>
+    <string name="edit">Edit</string>
+    <string name="post_text">Post Text</string>
 </resources>

@@ -2,22 +2,27 @@ package ru.netology.nmedia
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.CardPostBinding
 
-typealias LikeCallBack = (post: Post) -> Unit
-typealias ShareCallBack = (post: Post) -> Unit
+interface OnInteractionListener {
+    fun onLike(post: Post) {}
+    fun onShare(post: Post) {}
+    fun onRemove(post: Post) {}
+    fun onEdit(post: Post) {}
+    fun onEditMessage(post: Post) {}
+}
 
 class PostsAdapter (
-    val shareCallBack: ShareCallBack,
-    val likeCallBack: LikeCallBack,
+    private val callback: OnInteractionListener
 
     ) : androidx.recyclerview.widget.ListAdapter<Post, PostViewHolder>(PostDiffCallback()){
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return PostViewHolder(binding,shareCallBack, likeCallBack)
+        return PostViewHolder(binding,callback)
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
@@ -30,8 +35,7 @@ class PostsAdapter (
 
 class PostViewHolder(
     private val binding: CardPostBinding,
-    private val shareCallBack: ShareCallBack,
-    private val likeCallBack: LikeCallBack
+    private val callback: OnInteractionListener
 ): RecyclerView.ViewHolder(binding.root) {
 
     fun bind (post: Post) {
@@ -47,11 +51,29 @@ class PostViewHolder(
             )
             icLike.setOnClickListener{
 
-                likeCallBack(post)
+                callback.onLike(post)
             }
             icShare.setOnClickListener {
 
-                shareCallBack(post)
+                callback.onShare(post)
+            }
+            options.setOnClickListener {
+                PopupMenu(it.context, it).apply {
+                    inflate(R.menu.menu_post)
+                    setOnMenuItemClickListener { item ->
+                        when(item.itemId) {
+                            R.id.edit -> {
+                                callback.onEdit(post)
+                                true
+                            }
+                            R.id.remove -> {
+                                callback.onRemove(post)
+                                true
+                            }
+                            else -> false
+                        }
+                    }
+                }.show()
             }
         }
     }

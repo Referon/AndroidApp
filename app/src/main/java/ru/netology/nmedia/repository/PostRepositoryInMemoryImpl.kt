@@ -6,6 +6,8 @@ import ru.netology.nmedia.Post
 
 class PostRepositoryInMemoryImpl : PostRepository {
 
+    var nextId = 1
+
     private var posts = listOf(
         Post(
             4,
@@ -63,6 +65,31 @@ class PostRepositoryInMemoryImpl : PostRepository {
     override fun shareById(id: Int) {
         posts = posts.map {
             it.copy(shares = it.shares + 1)
+        }
+        data.value = posts
+    }
+
+    override fun removeById(id: Int) {
+        posts = posts.filter { it.id != id }
+        data.value = posts
+    }
+
+    override fun save(post: Post) {
+        if (post.id == 0) {
+            posts = listOf(
+                post.copy(
+                    id = nextId++,
+                    author = "Me",
+                    likedByMe = false,
+                    published = "Now"
+                )
+            ) + posts
+            data.value = posts
+            return
+        }
+
+        posts = posts.map {
+            if (it.id != post.id) it else it.copy(content = post.content)
         }
         data.value = posts
     }

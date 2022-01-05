@@ -7,4 +7,8 @@
     <string name="icon_share">Иконка поделиться</string>
     <string name="icon_like">Иконка лайков</string>
     <string name="options">Опции</string>
+    <string name="remove">Удалить</string>
+    <string name="save">Сохранить</string>
+    <string name="edit">Редактировать</string>
+    <string name="post_text">Текст поста</string>
 </resources>
