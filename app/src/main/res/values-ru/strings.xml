@@ -11,4 +11,5 @@
     <string name="save">Сохранить</string>
     <string name="edit">Редактировать</string>
     <string name="post_text">Текст поста</string>
+    <string name="edit_message">Редактирование</string>
 </resources>

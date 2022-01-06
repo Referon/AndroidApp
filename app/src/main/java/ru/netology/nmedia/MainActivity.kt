@@ -18,11 +18,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
+        binding.group.visibility = View.GONE
 
-        val adapter = PostsAdapter(object : OnInteractionListener{
+        val adapter = PostsAdapter(object : OnInteractionListener {
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
-
+                binding.group.visibility = View.VISIBLE
             }
 
             override fun onLike(post: Post) {
@@ -40,7 +41,6 @@ class MainActivity : AppCompatActivity() {
 
         binding.list.adapter = adapter
 
-
         viewModel.data.observe(this) { posts ->
             val newPost = adapter.itemCount < posts.size
             adapter.submitList(posts) {
@@ -50,10 +50,18 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        viewModel.edited.observe(this) {
+            with(binding.contentToEdit) {
+                setText(it.content)
+            }
+            binding.content.setText(it.content)
+        }
+
         binding.save.setOnClickListener {
             with(binding.content) {
                 if (text.isNullOrBlank()) {
-                    Toast.makeText(this@MainActivity,
+                    Toast.makeText(
+                        this@MainActivity,
                         "Content can't be empty'",
                         Toast.LENGTH_LONG
                     ).show()
@@ -67,6 +75,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        binding.closeEdit.setOnClickListener {
+            with(binding.content) {
+                binding.group.visibility = View.GONE
+                viewModel.save()
+                setText("")
+                clearFocus()
+                AndroidUtils.hideKeyBoard(this)
+            }
+        }
 
     }
 
