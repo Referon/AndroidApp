@@ -43,12 +43,11 @@ class PostViewHolder(
             author.text = post.author
             published.text = post.published
             message.text = post.content
-            like.text = CounterService.counterWithRemains(post.likes)
-            share.text = CounterService.counterWithRemains(post.shares)
+            icViews.text = CounterService.counterWithRemains(post.view)
+            icLike.text = CounterService.counterWithRemains(post.likes)
+            icShare.text = CounterService.counterWithRemains(post.shares)
+            icLike.isChecked = post.likedByMe
 
-            icLike.setImageResource(
-                if (post.likedByMe) R.drawable.ic_red_like_24 else R.drawable.ic_like_24
-            )
             icLike.setOnClickListener{
 
                 callback.onLike(post)

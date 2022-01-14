@@ -15,6 +15,7 @@ class PostViewModel: ViewModel() {
         "",
         false,
         0,
+        0,
         0
     )
     private val repository: PostRepository = PostRepositoryInMemoryImpl()

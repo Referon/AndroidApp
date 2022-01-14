@@ -16,7 +16,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             "21 мая",
             false,
             9998,
-            999
+            999,
+            1
         ),
         Post(
             3,
@@ -25,7 +26,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             "21 мая",
             false,
             99990,
-            999999
+            999999,
+            50
         ),
         Post(
             2,
@@ -34,7 +36,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             "21 мая",
             false,
             99990,
-            999999
+            999999,
+            45
         ),
         Post(
             1,
@@ -43,7 +46,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
             "21 мая",
             false,
             99990,
-            999999
+            999999,
+            4
         )
     )
     private val data = MutableLiveData(posts)
