@@ -95,7 +95,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:icon="@drawable/ic_share_24"
-        android:checkable="true"
         tools:text="@sample/posts.json/data/share"
         android:layout_marginStart="24dp"
         android:contentDescription="@string/icon_share"

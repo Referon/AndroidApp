@@ -5,10 +5,8 @@
 
         <item name="iconTint">@color/liked_tint_selector</item>
         <item name="android:textColor">?attr/colorControlNormal</item>
-        <item name="backgroundTint">@color/share_tint_selector</item>
+        <item name="backgroundTint">@android:color/transparent</item>
         <item name="rippleColor">@android:color/transparent</item>
-
-
 
     </style>
 
@@ -16,7 +14,7 @@
 
         <item name="iconTint">?attr/colorControlNormal</item>
         <item name="android:textColor">?attr/colorControlNormal</item>
-        <item name="backgroundTint">@color/share_tint_selector</item>
+        <item name="backgroundTint">@android:color/transparent</item>
         <item name="rippleColor">@android:color/transparent</item>
 
     </style>
