@@ -1,15 +1,13 @@
 package ru.netology.nmedia
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
+import androidx.activity.result.launch
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.ActivityMainBinding
 import ru.netology.nmedia.viewmodel.PostViewModel
 
 class MainActivity : AppCompatActivity() {
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,12 +16,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val viewModel: PostViewModel by viewModels()
-        binding.group.visibility = View.GONE
 
-        val adapter = PostsAdapter(object : OnInteractionListener {
+        val newPostContract = registerForActivityResult(NewPostContract()){ text ->
+            text?.let {
+                viewModel.changeContent(it)
+                viewModel.save()
+            }
+        }
+        val editPostContract = registerForActivityResult(EditPostContract()) { text ->
+            text?.let {
+                viewModel.changeContent(it)
+                viewModel.save()
+            }
+        }
+
+        val adapter = PostsAdapter(object : OnInteractionListener{
+
             override fun onEdit(post: Post) {
                 viewModel.edit(post)
-                binding.group.visibility = View.VISIBLE
+                editPostContract.launch(post.content)
             }
 
             override fun onLike(post: Post) {
@@ -50,41 +61,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.edited.observe(this) {
-            with(binding.contentToEdit) {
-                setText(it.content)
-            }
-            binding.content.setText(it.content)
-        }
+        binding.addPost.setOnClickListener {
 
-        binding.save.setOnClickListener {
-            with(binding.content) {
-                if (text.isNullOrBlank()) {
-                    Toast.makeText(
-                        this@MainActivity,
-                        "Content can't be empty'",
-                        Toast.LENGTH_LONG
-                    ).show()
-                    return@setOnClickListener
-                }
-                viewModel.changeContent(text.toString())
-                viewModel.save()
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyBoard(this)
-            }
+            newPostContract.launch()
         }
-
-        binding.closeEdit.setOnClickListener {
-            with(binding.content) {
-                binding.group.visibility = View.GONE
-                viewModel.save()
-                setText("")
-                clearFocus()
-                AndroidUtils.hideKeyBoard(this)
-            }
-        }
-
     }
-
 }
