@@ -75,7 +75,7 @@
         android:layout_height="0dp"
         app:barrierMargin="@dimen/common_spacing"
         app:barrierDirection="bottom"
-        app:constraint_referenced_ids="message" />
+        app:constraint_referenced_ids="video_cover" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/ic_views"
@@ -95,6 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:icon="@drawable/ic_share_24"
+        android:checkable="true"
         tools:text="@sample/posts.json/data/share"
         android:layout_marginStart="24dp"
         android:contentDescription="@string/icon_share"
@@ -115,7 +116,29 @@
         app:layout_constraintStart_toStartOf="parent"
         style="@style/Widget.App.LikeCheckBox"
         />
+    <ImageButton
+        android:id="@+id/video_cover"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/background_video"
+        app:layout_constraintTop_toBottomOf="@id/message"
+        />
+    <ImageButton
+        android:id="@+id/ic_play"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/video_cover"
+        app:layout_constraintBottom_toBottomOf="@id/video_cover"
+        app:layout_constraintStart_toStartOf="@id/video_cover"
+        app:layout_constraintEnd_toEndOf="@id/video_cover"
+        android:background="@android:color/transparent"
+        android:src="@drawable/ic_play_48"/>
 
-
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/video_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="video_cover,ic_play"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

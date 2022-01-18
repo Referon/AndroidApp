@@ -13,6 +13,7 @@ class PostViewModel: ViewModel() {
         "",
         "",
         "",
+        null,
         false,
         0,
         0,
