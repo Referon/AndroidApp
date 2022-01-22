@@ -52,6 +52,9 @@ class PostViewHolder(
             if (post.video == null) {
                 binding.videoGroup.visibility = View.GONE
             }
+            if (post.video != null) {
+                binding.videoGroup.visibility = View.VISIBLE
+            }
 
             icLike.setOnClickListener{
 
