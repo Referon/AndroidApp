@@ -50,4 +50,7 @@ class PostViewModel(application: Application): AndroidViewModel(application) {
     fun likeById(id: Int) = repository.likeById(id)
     fun shareById(id: Int) = repository.shareById(id)
     fun removeById(id:Int) = repository.removeById(id)
+    fun saveMessage(text: String?) = repository.saveMessage(text)
+    fun getMessage(): String? = repository.getMessgae()
+    fun deleteMessage() = repository.deleteMessage()
 }

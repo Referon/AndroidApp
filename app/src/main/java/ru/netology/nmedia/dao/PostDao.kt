@@ -9,5 +9,8 @@ interface PostDao {
     fun shareById(id: Int)
     fun removeById(id: Int)
     fun save(post: Post): Post
+    fun saveMessgae(text: String?)
+    fun getMessage(): String?
+    fun deleteMessage()
 
 }

@@ -53,4 +53,13 @@ class PostRepositorySQLiteImpl(private val dao: PostDao) : PostRepository {
         }
         data.value = posts
     }
+
+    override fun saveMessage(text: String?) =
+        dao.saveMessgae(text)
+
+
+    override fun getMessgae(): String? =
+        dao.getMessage()
+
+    override fun deleteMessage() = dao.deleteMessage()
 }

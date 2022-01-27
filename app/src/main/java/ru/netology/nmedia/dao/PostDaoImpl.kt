@@ -21,6 +21,12 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             ${PostColumns.COLUMN_LIKED_BY_ME} BOOLEAN NOT NULL DEFAULT 0
             );
             """.trimIndent()
+
+        val DLL_MESSAGE = """
+            CREATE TABLE ${SaveMessage.TABLE} (
+            ${SaveMessage.COLUMN_TEXT} TEXT
+            );
+            """.trimIndent()
     }
 
     object PostColumns {
@@ -45,6 +51,11 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             COLUMN_LIKES,
             COLUMN_LIKED_BY_ME
         )
+    }
+
+    object SaveMessage {
+        const val TABLE = "saveMessaage"
+        const val COLUMN_TEXT = "text"
     }
 
 
@@ -118,6 +129,43 @@ class PostDaoImpl(private val db: SQLiteDatabase) : PostDao {
             it.moveToNext()
             return map(it)
         }
+    }
+
+    override fun saveMessgae(text: String?){
+        if (text == null) {
+            db.delete(SaveMessage.TABLE, null, null)
+        } else {
+            val value = ContentValues().apply {
+                put(SaveMessage.COLUMN_TEXT, text)
+            }
+            db.replace(SaveMessage.TABLE, null, value)
+        }
+    }
+
+    override fun getMessage(): String? =
+
+        db.query(
+            SaveMessage.TABLE,
+            arrayOf(SaveMessage.COLUMN_TEXT),
+            null,
+            null,
+            null,
+            null,
+            null,
+        ).use {
+            if (!it.moveToLast()) {
+                null
+            } else {
+                it.getString(it.getColumnIndexOrThrow(SaveMessage.COLUMN_TEXT))
+            }
+        }
+
+    override fun deleteMessage() {
+        db.execSQL(
+            """
+           DELETE FROM saveMessaage;
+        """.trimIndent()
+        )
     }
 
     private fun map(cursor: Cursor): Post {

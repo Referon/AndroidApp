@@ -10,4 +10,7 @@ interface PostRepository {
     fun shareById(id: Int)
     fun removeById(id: Int)
     fun save(post: Post)
+    fun saveMessage(text: String?)
+    fun getMessgae():String?
+    fun deleteMessage()
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -25,6 +26,14 @@ class NewPostFragment : Fragment() {
 
         binding.content.requestFocus()
 
+        viewModel.getMessage()?.let(binding.content::setText)
+
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            viewModel.saveMessage(binding.content.text.toString())
+            remove()
+            requireActivity().onBackPressed()
+        }
+
         binding.save.setOnClickListener {
             val text = binding.content.text.toString()
 
@@ -33,6 +42,7 @@ class NewPostFragment : Fragment() {
                 viewModel.save()
 
             }
+            viewModel.deleteMessage()
             findNavController().navigateUp()
         }
 
