@@ -26,7 +26,9 @@ class NewPostFragment : Fragment() {
 
         binding.content.requestFocus()
 
-        viewModel.getMessage()?.let(binding.content::setText)
+        if (viewModel.getMessage() != null) {
+            viewModel.getMessage()?.let(binding.content::setText)
+        }
 
         val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             viewModel.saveMessage(binding.content.text.toString())
