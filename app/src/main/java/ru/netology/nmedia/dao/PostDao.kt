@@ -47,8 +47,14 @@ interface PostDao {
         if (text == null) {
             deleteMessage()
         } else {
-            val saveMessage = SaveMessageEntity(text = text)
-            insertSaveMessage(saveMessage)
+            val id = 0
+            val saveMessage = SaveMessageEntity(text = text, id = id)
+            if (saveMessage.id == id) {
+                deleteMessage()
+                insertSaveMessage(saveMessage)
+            } else {
+                insertSaveMessage(saveMessage)
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class SaveMessageEntity(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    val id: Int,
     val text: String
 )

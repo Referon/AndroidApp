@@ -20,29 +20,31 @@ class NewPostFragment : Fragment() {
     ): View {
         val binding = FragmentNewPostBinding.inflate(inflater, container, false)
 
-        arguments?.textArg?.let { binding.content.setText(it) }
-
         val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
+
+        arguments?.textArg?.let { binding.content.setText(it) }
 
         binding.content.requestFocus()
 
-        if (viewModel.getMessage() != null) {
+        if (binding.content.text.isBlank() && viewModel.getMessage() != null) {
             viewModel.getMessage()?.let(binding.content::setText)
         }
 
         val callback = requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            viewModel.saveMessage(binding.content.text.toString())
-            remove()
-            requireActivity().onBackPressed()
-        }
 
+            if (arguments?.textArg.toString() != binding.content.text.toString() && viewModel.getMessage() != binding.content.text.toString()) {
+                viewModel.saveMessage(binding.content.text.toString())
+            }
+            remove()
+            viewModel.cancel()
+            findNavController().navigateUp()
+        }
         binding.save.setOnClickListener {
             val text = binding.content.text.toString()
 
             if (text.isNotBlank()) {
                 viewModel.changeContent(text)
                 viewModel.save()
-
             }
             viewModel.deleteMessage()
             findNavController().navigateUp()
