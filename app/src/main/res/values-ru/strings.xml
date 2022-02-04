@@ -12,4 +12,9 @@
     <string name="edit">Редактировать</string>
     <string name="post_text">Текст поста</string>
     <string name="edit_message">Редактирование</string>
+    <string name="channel_remote_name">Уведомление</string>
+    <string name="channel_remote_description">Описание</string>
+    <string name="notification_user_liked">%1$s поставил(a) лайк посту %2$s</string>
+    <string name="error_notification_text">Обновите приложения для отображения уведомлений</string>
+    <string name="error_notification_title">Версия приложения устарела</string>
 </resources>

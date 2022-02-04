@@ -11,4 +11,9 @@
     <string name="edit">Edit</string>
     <string name="post_text">Post Text</string>
     <string name="edit_message">Edit Message</string>
+    <string name="channel_remote_name">Notification</string>
+    <string name="channel_remote_description">Description</string>
+    <string name="notification_user_liked">%1$s liked the post to %2$s</string>
+    <string name="error_notification_text">Update app to display notifications</string>
+    <string name="error_notification_title">The app version is outdated</string>
 </resources>
