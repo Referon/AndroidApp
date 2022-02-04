@@ -16,4 +16,6 @@
     <string name="notification_user_liked">%1$s liked the post to %2$s</string>
     <string name="error_notification_text">Update app to display notifications</string>
     <string name="error_notification_title">The app version is outdated</string>
+    <string name="notification_user_uploaded_post">%1$s has published a new post:</string>
+
 </resources>

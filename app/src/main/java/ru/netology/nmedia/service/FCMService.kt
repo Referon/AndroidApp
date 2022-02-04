@@ -40,6 +40,9 @@ class FCMService: FirebaseMessagingService() {
                         gson.fromJson(remoteMessage.data[content], Like::class.java
                         )
                     )
+                    Action.POST -> newPost(
+                        gson.fromJson(remoteMessage.data[content], Post::class.java)
+                    )
                 }
             }
         } catch (e: IllegalArgumentException) {
@@ -62,6 +65,24 @@ class FCMService: FirebaseMessagingService() {
                 )
             )
             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .build()
+        NotificationManagerCompat.from(this)
+            .notify(Random.nextInt(100_000), notification)
+    }
+
+    private fun newPost(newPost: Post) {
+        val notification = NotificationCompat.Builder(this, channelId)
+            .setSmallIcon(R.drawable.ic_launcher_foreground)
+            .setContentTitle(
+                getString(
+                    R.string.notification_user_uploaded_post,
+                    newPost.userName
+                )
+            )
+            .setContentText(newPost.content)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setStyle(NotificationCompat.BigTextStyle()
+                .bigText(newPost.content))
             .build()
         NotificationManagerCompat.from(this)
             .notify(Random.nextInt(100_000), notification)
@@ -90,6 +111,7 @@ class FCMService: FirebaseMessagingService() {
 }
 
 enum class Action {
+    POST,
     LIKE
 }
 data class Like(
@@ -97,6 +119,12 @@ data class Like(
     val userName: String,
     val postId: Long,
     val postAuthor: String
+)
+
+data class Post(
+    val userId: Long,
+    val userName: String,
+    val content: String
 )
 
 data class AnyNotify(

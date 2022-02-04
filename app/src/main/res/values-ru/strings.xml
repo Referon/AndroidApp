@@ -17,4 +17,5 @@
     <string name="notification_user_liked">%1$s поставил(a) лайк посту %2$s</string>
     <string name="error_notification_text">Обновите приложения для отображения уведомлений</string>
     <string name="error_notification_title">Версия приложения устарела</string>
+    <string name="notification_user_uploaded_post">%1$s опубликовал новый пост:</string>
 </resources>
