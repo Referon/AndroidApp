@@ -14,6 +14,7 @@ interface OnInteractionListener {
     fun onRemove(post: Post) {}
     fun onEdit(post: Post) {}
     fun onVideo(post: Post) {}
+    fun onPost(post: Post) {}
 }
 
 class PostsAdapter (
@@ -89,6 +90,9 @@ class PostViewHolder(
                         }
                     }
                 }.show()
+            }
+            menu.setOnClickListener {
+                callback.onPost(post)
             }
         }
     }

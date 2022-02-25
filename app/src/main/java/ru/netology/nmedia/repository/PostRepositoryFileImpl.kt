@@ -30,15 +30,13 @@ class PostRepositoryFileImpl(private val context: Context) : PostRepository {
     }
 
     override fun getAll(): LiveData<List<Post>> = data
+
     override fun likeById(id: Int) {
         posts = posts.map {
-            if (it.id != id) it else it.copy(likedByMe = !it.likedByMe)
-        }
-        posts = posts.map {
-            if (it.id == id && !it.likedByMe) it.copy(likes = it.likes - 1) else it
-        }
-        posts = posts.map {
-            if (it.id == id && it.likedByMe) it.copy(likes = it.likes + 1) else it
+            if (it.id != id) it else if (!it.likedByMe) it.copy(
+                likedByMe = !it.likedByMe,
+                likes = it.likes + 1
+            ) else it.copy(likedByMe = !it.likedByMe, likes = it.likes - 1)
         }
         data.value = posts
         sync()
